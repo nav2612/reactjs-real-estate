@@ -27,12 +27,12 @@ const Footer = () => {
                     </div>
                     <div className="col-lg-3 col-md-6">
                         <div>
-                            <p className="footer-title">Categories</p>
+                            <p className="footer-title">Popular Cities</p>
                             <ul className="footer-ul">
-                                <li>Category 1</li>
-                                <li>Category 2</li>
-                                <li>Category 3</li>
-                                <li>Category 4</li>
+                                <li>Vancouver</li>
+                                <li>Langley</li>
+                                <li>Surrey</li>
+                                <li>Burnaby</li>
                             </ul>
                         </div>
                     </div>
