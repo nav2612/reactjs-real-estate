@@ -14,10 +14,10 @@ const FlatItem = ({slug}) => {
                     </div>
                     <div className="item-icon d-flex alig-items-center justify-content-between">
                         <div>
-                            <i className="fas fa-check-circle"></i> <span> 3 Beds </span>
+                            <i className="fas fa-calendar">&nbsp;</i> <span> 20 April, 2023 </span>
                         </div>
                         <div>
-                            <i className="fas fa-check-circle"></i> <span>3 Baths </span>
+                            <i className="fas fa-clock"></i> <span>10AM - 12PM </span>
                         </div>
                         <Link to={`/flat/${slug}`} className="item-title">
                             <button className="btn btn-detail">View</button>
