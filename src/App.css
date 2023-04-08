@@ -768,8 +768,7 @@ section {
   font-weight: 400;
   line-height: 1.5;
   text-align: center;
-    text-decoration: none;
-    vertical-align: middle;
+  vertical-align: middle;
   background-color: #364465;
   color: white;
   border: 1px solid transparent;
@@ -779,3 +778,31 @@ section {
   font-size: 1rem;
   border-radius: 0.25rem;
 }
+
+.sort-filter {
+  display: flex;
+  justify-content: flex-end;
+  margin-bottom: 20px;
+}
+.sort-filter button, select {
+  margin: 10px;
+  font-weight: 400;
+  line-height: 1.5;
+  text-align: center;
+  vertical-align: middle;
+  background-color: #364465;
+  color: white;
+  border: 1px solid transparent;
+  padding: 0.275rem 0.5rem;
+  font-size: 1rem;
+  border-radius: 0.25rem;
+}
+
+.sort-filter label{
+  margin: 10px;
+  font-weight: 800;
+  line-height: 1.5;
+  text-align: center;
+  vertical-align: middle;
+  padding: 0.275rem 0.5rem;
+  font-size: 1rem;}

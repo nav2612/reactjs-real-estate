@@ -7,6 +7,8 @@ const FlatList = () => {
     text: "Explore the listings near you",
     description: "Check out the properties",
   };
+
+  
  
   const flats = [
   {
@@ -67,7 +69,27 @@ const FlatList = () => {
   const flatsPerPage = 9;
   const indexOfLastFlat = currentPage * flatsPerPage;
   const indexOfFirstFlat = indexOfLastFlat - flatsPerPage;
-  const flatsToShow = flats.slice(indexOfFirstFlat, indexOfLastFlat);
+
+  const [sortOption, setSortOption] = useState("priceAsc");
+  const sortOptions = {
+    priceAsc: "Price: Low to High",
+    priceDesc: "Price: High to Low",
+    areaAsc: "Area: Small to Large",
+    areaDesc: "Area: Large to Small",
+  };
+
+  let flatsToShow = flats.slice(indexOfFirstFlat, indexOfLastFlat);
+
+  // sort flats based on the selected option
+  if (sortOption === "priceAsc") {
+    flatsToShow = flatsToShow.sort((a, b) => a.price - b.price);
+  } else if (sortOption === "priceDesc") {
+    flatsToShow = flatsToShow.sort((a, b) => b.price - a.price);
+  } else if (sortOption === "areaAsc") {
+    flatsToShow = flatsToShow.sort((a, b) => a.area - b.area);
+  } else if (sortOption === "areaDesc") {
+    flatsToShow = flatsToShow.sort((a, b) => b.area - a.area);
+  }
 
   const totalPages = Math.ceil(flats.length / flatsPerPage);
 
@@ -78,11 +100,25 @@ const FlatList = () => {
   const handlePrevPage = () => {
     setCurrentPage(currentPage - 1);
   };
+  const handleSortChange = (event) => {
+    setSortOption(event.target.value);
+  };
 
   return (
     <section className="section-all-re">
       <div className="container">
         <Title title={title.text} description={title.description} />
+        <div className="sort-filter">
+        <label htmlFor="sort">Sort By: </label>
+          <select id="sort" value={sortOption} onChange={handleSortChange}>
+            {Object.keys(sortOptions).map((option) => (
+              <option key={option} value={option}>
+                {sortOptions[option]}
+              </option>
+            ))}
+          </select>
+          <button>Filter</button>
+        </div>
         <div className="row">
           {flatsToShow.map((flat) => (
             <FlatItem key={flat.id} slug={flat.slug} />
