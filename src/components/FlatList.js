@@ -1,11 +1,13 @@
 import { useState } from "react";
 import Title from "./Title";
 import FlatItem from "./FlatItem";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faFilter } from "@fortawesome/free-solid-svg-icons";
 
 const FlatList = () => {
   const title = {
-    text: "Explore the listings near you",
-    description: "Check out the properties",
+    text: "Explore the open houses",
+    description: "Check out the properties near you",
   };
 
   
@@ -109,7 +111,7 @@ const FlatList = () => {
       <div className="container">
         <Title title={title.text} description={title.description} />
         <div className="sort-filter">
-        <label htmlFor="sort">Sort By: </label>
+        <button> <FontAwesomeIcon icon={faFilter} /> Filters</button>
           <select id="sort" value={sortOption} onChange={handleSortChange}>
             {Object.keys(sortOptions).map((option) => (
               <option key={option} value={option}>
@@ -117,11 +119,6 @@ const FlatList = () => {
               </option>
             ))}
           </select>
-          <button>Any Price</button>
-          <button>0+ Bed</button>
-          <button>0+ Bath</button>
-          <button>0+ Area</button>
-          <button>Any Category</button>
         </div>
         <div className="row">
           {flatsToShow.map((flat) => (
