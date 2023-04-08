@@ -117,7 +117,11 @@ const FlatList = () => {
               </option>
             ))}
           </select>
-          <button>Filter</button>
+          <button>Any Price</button>
+          <button>0+ Bed</button>
+          <button>0+ Bath</button>
+          <button>0+ Area</button>
+          <button>Any Category</button>
         </div>
         <div className="row">
           {flatsToShow.map((flat) => (
