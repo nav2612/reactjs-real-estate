@@ -53,7 +53,6 @@
   font-weight: 600;
   padding: 5px 15px;
   font-size: 14px;
-
 }
 .sub-ul a{
   color: inherit;
@@ -70,9 +69,7 @@
   -o-border-radius: 8px;
   display: flex;
   justify-content: space-between;
-
 }
-
 .banner{
   min-height: 500px;
   color:White;
