@@ -8,7 +8,7 @@ const Blog = () => {
                     <div className="row">
                         <div className="col-lg-12">
                             <h1 className="page-title">Blog</h1>
-                            <h2 className="page-description">Blog</h2>
+                            <h2 className="page-description">Check out our latest posts</h2>
                         </div>
                     </div>
                 </div>

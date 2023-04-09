@@ -24,15 +24,10 @@ const Header = () => {
                                     <Link className="nav-link" to="/">Home</Link>
                                 </li>
                                 <li className="nav-item">
-                                    <Link  className="nav-link" to="/blog">Blog</Link>
-                                </li>
-                                <li className="nav-item">
                                     <Link  className="nav-link" to="/about">About Us</Link>
                                 </li>
-                                <li className="nav-item">
-                                    <Link className="nav-link" to="/contact">Contact</Link>
-                                </li>
-                                <li className="nav-item"><Link className="nav-link" style={{backgroundColor: '#24a0ed', color: 'white !important', padding: '7px 20px', borderRadius: '25px'}}>
+                                <li className="nav-item"><Link className="nav-link" style={{backgroundColor: '#253156', color: "white !important", padding: '7px 20px', borderRadius: '25px'
+                            }} to="/about">
                         Login</Link></li>
                             </ul>
                         </div>

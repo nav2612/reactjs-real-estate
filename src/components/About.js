@@ -6,7 +6,7 @@ const About = () => {
                     <div className="row">
                         <div className="col-lg-12">
                             <h1 className="page-title">About</h1>
-                            <h2 className="page-description">About</h2>
+                            <h2 className="page-description">Visit My Open House</h2>
                         </div>
                     </div>
                 </div>
@@ -20,7 +20,7 @@ const About = () => {
                         <div className="col-lg-6">
                             <div className="about-item">
                                 <div className="title">
-                                    Lorem ipsum dolor sit amet
+                                    Visit My Open House
                             </div>
                                 <div className="about-text">
                                     Lorem ipsum is simply free text dolor sit am adipi we help you ensure everyone is in the right jobs sicing elit, sed do consulting firms Et leggings across the nation tempor.
