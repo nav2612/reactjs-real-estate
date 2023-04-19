@@ -26,8 +26,7 @@ const Header = () => {
                                 <li className="nav-item">
                                     <Link  className="nav-link" to="/about">About Us</Link>
                                 </li>
-                                <li className="nav-item"><Link className="nav-link" style={{backgroundColor: '#253156', color: "white !important", padding: '7px 20px', borderRadius: '25px'
-                            }} to="/login_realtor">
+                                <li className="nav-item"><Link className="nav-link" style={{fontWeight: '500', backgroundColor: '#253156', color: "white", padding: '7px 20px', borderRadius: '25px'}} to="/login_realtor">
                         Login</Link></li>
                             </ul>
                         </div>
