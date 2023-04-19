@@ -637,9 +637,6 @@
   font-weight: bold;
   font-size: 20px;
 }
-
-
-
 .widget{
   background: white;
   margin-bottom: 10px;
@@ -865,4 +862,11 @@
   font-family:'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
   font-size: 1.1rem;
   letter-spacing: 2px;
+}
+
+.login-box #name-field input{
+  display: inline-block;
+  margin-right:2px;
+  width: 49.5%;
+  margin-bottom: 25px;
 }

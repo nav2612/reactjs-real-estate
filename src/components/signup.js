@@ -22,22 +22,24 @@ const Signup_realtor = () => {
   return (
     <div className="login-box">
       <center>
-        <h1>Welcome !!</h1>
+        <h1>Welcome to Open House</h1>
+        <h2>Sign up</h2>
+        <div id="name-field">
+          <label>Name</label>
         <input
           type="text"
-          className="first-name"
-          placeholder="firstName"
+          placeholder="First Name"
           value={firstName}
           onChange={(e) => setFirstName(e.target.value)}
         />
         <input
           type="text"
-          className="last-name"
-          placeholder="lastName"
+          placeholder="Last Name"
           value={lastName}
           onChange={(e) => setLastName(e.target.value)}
-        />
+        /></div>
         <div id="phone-input" style={{ display: !show ? "block" : "none" }}>
+          <label>Phone Number</label>
           <PhoneInput
             country={"ca"}
             onlyCountries={["ca"]}
@@ -50,7 +52,7 @@ const Signup_realtor = () => {
             }}
             placeholder="Enter phone number"
           />
-          <br></br>
+          <label>Password</label>
           <div>
             <input
               type="password"
@@ -59,16 +61,16 @@ const Signup_realtor = () => {
               value={passw}
               onChange={(e) => setPassw(e.target.value)}
             />
-
+            <label>Confirm Password</label>
             <input
               type="password"
               className="confirm-password"
-              placeholder="confirm password"
+              placeholder="Confirm password"
               value={confirmPassword}
               onChange={(e) => setConfirmPassword(e.target.value)}
             />
           </div>
-          <button id="send-otp" onClick={signin}>
+          <button style={{marginTop:'50px'}} id="send-otp" onClick={signin}>
             Sign Up
           </button>
         </div>

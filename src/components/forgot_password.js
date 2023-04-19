@@ -21,17 +21,17 @@ const Login = () => {
 	return (
 		<div className='login-box'>
 			<center>
-                <h1>Reset Password</h1>
-                <h4>Enter your phone number to send the reset link</h4><br /><br /><br />
+                <h2>Reset Password</h2>
+				<label>Phone Number</label>
 				<div id = 'phone-input'>
 					<PhoneInput country={'ca'}
+					style={{marginBottom:'60px'}}
 					onlyCountries={['ca']}
 					disableAreaCodes
 					disableDropdown
 					countryCodeEditable={false}
 					value={mynumber} 
-					onChange={(e) => {setnumber(e)}}/><br></br>
-                    <br></br><br></br><br></br><br></br>
+					onChange={(e) => {setnumber(e)}}/>
 					{/*<div id="recaptcha-container"></div>*/}
 					<button id="send-otp">Submit</button>
 				</div>
