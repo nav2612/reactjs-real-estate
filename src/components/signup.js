@@ -20,6 +20,7 @@ const Signup_realtor = () => {
   };
 
   return (
+    <body className="sign-up-page">
     <div className="login-box">
       <center>
         <h1>Welcome to Open House</h1>
@@ -76,6 +77,7 @@ const Signup_realtor = () => {
         </div>
       </center>
     </div>
+    </body>
   );
 };
 

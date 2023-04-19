@@ -19,6 +19,7 @@ const Login = () => {
 	//}
 
 	return (
+		<body className='sign-up-page'>
 		<div className='login-box'>
 			<center>
                 <h2>Reset Password</h2>
@@ -37,6 +38,7 @@ const Login = () => {
 				</div>
 			</center>
 		</div>
+		</body>
 	);
 }
 

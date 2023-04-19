@@ -789,9 +789,9 @@
 }
 .login-box
 {
+  opacity: 1;
     position: relative;
-    margin: 100px;
-    left: 32%;
+    left: 37%;
     width: 500px;
     padding: 40px;
     border-radius: 8px;
@@ -869,4 +869,11 @@
   margin-right:2px;
   width: 49.5%;
   margin-bottom: 25px;
+}
+
+.sign-up-page{
+  background: linear-gradient(rgba(255,255,255,.5), rgba(255,255,255,.5)),url('https://images.unsplash.com/photo-1516156008625-3a9d6067fab5?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1170&q=80');
+  padding: 100px;
+  background-repeat: no-repeat;
+  background-size:100%;
 }

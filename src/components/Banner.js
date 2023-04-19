@@ -27,7 +27,7 @@ const Banner = () => {
         }
     }
     return (
-        <div className="banner d-flex align-items-center" style={{ backgroundImage: `url(https://plus.unsplash.com/premium_photo-1679866951595-00747b9ecfc3?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=812&q=80)` }}>
+        <div className="banner d-flex align-items-center" style={{ backgroundImage: `url(https://images.unsplash.com/photo-1516156008625-3a9d6067fab5?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1170&q=80)` }}>
             <div className="bg-custom">
                 <div className="container">
                     <div className="row">

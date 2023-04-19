@@ -22,6 +22,7 @@ const Login = () => {
 	}
 
 	return (
+		<body className="sign-up-page">
 		<div className='login-box'>
 			<center>
 				<h1>Welcome to Open House!</h1>
@@ -47,6 +48,7 @@ const Login = () => {
 				Not a member? <a href="/signup_realtor">Sign up</a>
 			</center>
 		</div>
+		</body>
 	);
 }
 
