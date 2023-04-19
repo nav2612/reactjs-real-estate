@@ -12,6 +12,7 @@ import Forgot_password from "./components/forgot_password"
 import Login_realtor from "./components/login"
 import Openhouse from "./components/openhouse"
 import {BrowserRouter as Router,Route} from "react-router-dom";
+import Verify_phone from "./components/verify_phoneNumber";
  
 
 function App() {
@@ -29,6 +30,7 @@ function App() {
         <Route path='/openhouse' component={Openhouse}></Route>
         <Route path='/signup_realtor' component={Signup_realtor}></Route>
         <Route path='/forgot_password' component={Forgot_password}></Route>
+        <Route path='/verify' component={Verify_phone}></Route>
         <Footer />
       </div>
     </Router>

@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import PhoneInput from "react-phone-input-2";
 import "react-phone-input-2/lib/style.css";
+import { Link } from "react-router-dom";
 
 const Signup_realtor = () => {
   var [mynumber, setnumber] = useState("");
@@ -16,6 +17,9 @@ const Signup_realtor = () => {
     if (mynumber === "" || mynumber.length < 10) {
       alert("Please enter a valid phone number");
       return;
+    }
+    else{
+      <Link to='/verify'></Link>
     }
   };
 
@@ -53,6 +57,14 @@ const Signup_realtor = () => {
             }}
             placeholder="Enter phone number"
           />
+          <label>Company</label>
+            <input
+              type="password"
+              className="password"
+              placeholder="Enter Company's name"
+              value={passw}
+              onChange={(e) => setPassw(e.target.value)}
+            />
           <label>Password</label>
           <div>
             <input
