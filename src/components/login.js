@@ -24,7 +24,9 @@ const Login = () => {
 	return (
 		<div className='login-box'>
 			<center>
-                <h1>Login for Realtor</h1><br /><br /><br />
+				<h1>Welcome to Open House!</h1>
+                <h2>Login to your account</h2>
+				<label>Phone Number</label>
 				<div id = 'phone-input'>
 					<PhoneInput country={'ca'}
 					onlyCountries={['ca']}
@@ -33,19 +35,15 @@ const Login = () => {
 					countryCodeEditable={false}
 					value={mynumber} 
 					onChange={(e) => {setnumber(e)}}
-					placeholder="Enter phone number" /><br></br>
-					<div> 
-					<input type="text" name="passw" id="passw" placeholder='Password' value={passw}
+					placeholder="Enter phone number" /></div>
+					<label>Password</label>
+					<input type="text" name="passw" id="passw" placeholder='Enter your password' value={passw}
 					onChange={(e)=>setPassw(e.target.value)}/> 
-				</div>  
-					<br /><br /><br />
-
 					{/*<div id="recaptcha-container"></div>*/}
 					<button id="send-otp" onClick={()=>signin()}>Login</button>
-				</div>
-				<br></br>
+				
 				<a href='forgot_password'>Forgot password?</a>
-				<br></br><br></br>
+				<br/><br/><br/>
 				Not a member? <a href="/signup_realtor">Sign up</a>
 			</center>
 		</div>

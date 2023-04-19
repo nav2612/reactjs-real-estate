@@ -7,6 +7,10 @@ import Contact from "./components/Contact"
 import About from "./components/About"
 import Blog from "./components/Blog"
 import BlogDetail from "./components/BlogDetail"
+import Signup_realtor from "./components/signup"
+import Forgot_password from "./components/forgot_password"
+import Login_realtor from "./components/login"
+import Openhouse from "./components/openhouse"
 import {BrowserRouter as Router,Route} from "react-router-dom";
  
 
@@ -21,6 +25,10 @@ function App() {
         <Route path="/blog" exact component={Blog}></Route>
         <Route path="/blog/:id"  component={BlogDetail}></Route>
         <Route path="/flat/:slug"  component={FlatDetail}></Route>
+        <Route path='/login_realtor' component={Login_realtor}></Route>
+        <Route path='/openhouse' component={Openhouse}></Route>
+        <Route path='/signup_realtor' component={Signup_realtor}></Route>
+        <Route path='/forgot_password' component={Forgot_password}></Route>
         <Footer />
       </div>
     </Router>
