@@ -9,17 +9,25 @@ exports.createList = (req, res) => {
     const user = req.decoded;
     if (err) {
       return res.status(500).json({
-        status:false,
-         message: err.message });
+        status: false,
+        message: err.message,
+      });
     }
 
     const { size, price, address } = req.body;
 
     // Validate required fields
-    if (!price || !size || !address || !thumbnail) {
+    if (!price || !size || !address) {
       return res.status(400).send({
         status: false,
         message: "All fields are required",
+      });
+    }
+    // Check if thumbnail is provided
+    if (!req.file) {
+      return res.status(400).json({
+        status: false,
+        message: "Thumbnail is required",
       });
     }
     const thumbnail = req.file.filename;
