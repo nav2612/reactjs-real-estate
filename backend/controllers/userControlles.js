@@ -6,7 +6,7 @@ const { sendSMS } = require("../utils/sms");
 const { validationResult } = require("express-validator");
 
 // SIGN UP API creating new users
-exports.signUp = (req, res) => {
+exports.signUp = async (req, res) => {
   const {
     firstName,
     lastName,
@@ -25,36 +25,91 @@ exports.signUp = (req, res) => {
     !password ||
     !confirmPassword
   ) {
-    res.status(500).send({
+    res.status(400).send({
       status: false,
-      message: "Fields can not be empty!",
+      message: "All fields are required",
     });
-  } else {
-    // Save entry in user cred table
-    const user_cred = new Users({ ...req.body });
+    return;
+  }
 
-    user_cred
-      .save()
-      .then((user) => {
-        return res.status(200).send({
-          status: true,
-          message: "User registered successfully!",
-          data: user_cred,
-        });
-      })
-      .catch((err) => {
-        if (err.code === 11000 && err.keyPattern.phoneNumber) {
-          return res.status(400).send({
-            status: false,
-            message: "Phone number already exists in the database",
-          });
-        } else {
-          return res.status(400).send({
-            status: false,
-            message: err.message,
-          });
-        }
+  try {
+    // Check if the user already exists
+    let user = await Users.findOne({ phoneNumber });
+    if (user) {
+      return res.status(400).send({
+        status: false,
+        message: "Phone number already exists in the database",
       });
+    }
+
+    // Generate OTP
+    const otp = generateOTP();
+
+    // Save user details and OTP to the database
+    user = new Users({
+      firstName,
+      lastName,
+      companyName,
+      phoneNumber,
+      password,
+      otp,
+      status: false, 
+    });
+    await user.save();
+
+    // Send OTP to the user's phone number
+    const message = `Your OTP for sign-up is ${otp}`;
+    sendSMS(phoneNumber, message);
+
+    return res.status(200).send({
+      status: true,
+      message: "OTP has been sent. Please verify your Number !",
+      data: user,
+    });
+  } catch (err) {
+    return res.status(500).send({
+      status: false,
+      message: err.message,
+    });
+  }
+};
+
+// API To verrify OTP
+exports.verifyOtp = async (req, res) => {
+  const { phoneNumber, otp } = req.body;
+
+  try {
+    // Find the user by phone number
+    const user = await Users.findOne({phoneNumber: phoneNumber });
+    if (!user) {
+      return res.status(404).json({
+        status: false,
+        message: "User not found",
+      });
+    }
+
+    // Check if OTP matches
+    if (user.otp !== otp) {
+      return res.status(400).json({
+        status: false,
+        message: "Invalid OTP",
+      });
+    }
+
+    // OTP verified successfully, update the user document
+    user.otp = "";
+    user.status = true;
+    await user.save();
+
+    return res.status(200).json({
+      status: true,
+      message:"OTP verified successfully.",
+    });
+  } catch (err) {
+    return res.status(500).json({
+      status: false,
+      message: err.message,
+    });
   }
 };
 
@@ -88,6 +143,7 @@ exports.login = (req, res) => {
         status: true,
         message: "Login successful",
         data: {
+          id: user._id,
           firstName: user.firstName,
           lastName: user.lastName,
           phoneNumber: user.phoneNumber,
@@ -104,86 +160,7 @@ exports.login = (req, res) => {
     });
 };
 
-// API for Generating random 6 digits OTP 
-exports.generateOtp = async (req, res) => {
-  const errors = validationResult(req);
-  if (!errors.isEmpty()) {
-    return res.status(400).json({ errors: errors.array() });
-  }
-
-  const { phoneNumber } = req.body;
-  try {
-    const user = await Users.findOne({ phoneNumber });
-    if (!user) {
-      return res.status(404).json({
-        status: false,
-        message: "User not found",
-      });
-    }
-
-    // Generate OTP and save it to the user's document in the database
-    const otp = generateOTP();
-    user.otp = otp;
-    await user.save();
-
-    // Send OTP to user's phone number
-    const message = `Your OTP for resetting the password is ${otp}`;
-    sendSMS(phoneNumber, message);
-
-    return res.status(200).json({
-      status: true,
-      message: "OTP sent to the user",
-    });
-  } catch (err) {
-    console.error(err);
-    return res.status(500).json({
-      status: false,
-      message: "Internal server error",
-    });
-  }
-};
-
-// API To verrify OTP 
-exports.verifyOtp = async (req, res) => {
-  const errors = validationResult(req);
-  if (!errors.isEmpty()) {
-    return res.status(400).json({ errors: errors.array() });
-  }
-
-  const { phoneNumber, otp } = req.body;
-  try {
-    const user = await Users.findOne({ phoneNumber });
-    if (!user) {
-      return res.status(404).json({
-        status: false,
-        message: "User not found",
-      });
-    }
-
-    if (user.otp !== otp) {
-      return res.status(400).json({
-        status: false,
-        message: "Invalid OTP",
-      });
-    }
-
-    // OTP verified successfully, reset the OTP in the user's document
-    user.otp = "";
-    await user.save();
-
-    return res.status(200).json({
-      status: true,
-      message: "OTP verified successfully",
-    });
-  } catch (err) {
-    console.error(err);
-    return res.status(500).json({
-      status: false,
-      message: "Internal server error",
-    });
-  }
-};
-
+// reseting password
 exports.resetPassword = async (req, res) => {
   const id = req.params.id;
   const { password, confirmPassword } = req.body;
@@ -234,4 +211,76 @@ exports.resetPassword = async (req, res) => {
         message: err.message,
       });
     });
+};
+
+/*  UUdating user details
+ */
+exports.updateUser = async (req, res) => {
+  try {
+    const userId = req.decoded.id;
+    const { firstName, lastName, companyName, phoneNumber } = req.body;
+    const updatedUser = await Users.findByIdAndUpdate(
+      userId,
+      { firstName, lastName, companyName, phoneNumber },
+      { new: true }
+    );
+
+    if (!updatedUser) {
+      return res.status(404).json({
+        status: false,
+        message: "User not found",
+      });
+    }
+
+    res.status(200).json({
+      status: true,
+      message: "UserDetails  updated successfully",
+      data: updatedUser,
+    });
+  } catch (err) {
+    return res.status(500).send({
+      status: false,
+      message: err.message,
+    });
+  }
+};
+
+
+
+// API for Generating random 6 digits OTP (NOT USING NOW)
+exports.generateOtp = async (req, res) => {
+  const errors = validationResult(req);
+  if (!errors.isEmpty()) {
+    return res.status(400).json({ errors: errors.array() });
+  }
+
+  const { phoneNumber } = req.body;
+  try {
+    // const user = await Users.findOne({ phoneNumber });
+    // if (!user) {
+    //   return res.status(404).json({
+    //     status: false,
+    //     message: "User not found",
+    //   });
+    // }
+
+    // Generate OTP and save it to the user's document in the database
+    const otp = generateOTP();
+    // user.otp = otp;
+    // await user.save();
+
+    // Send OTP to user's phone number
+    const message = `Your OTP for resetting the password is ${otp}`;
+    sendSMS(phoneNumber, message);
+
+    return res.status(200).json({
+      status: true,
+      message: "OTP sent to the user",
+    });
+  } catch (err) {
+    return res.status(500).json({
+      status: false,
+      message: err.message,
+    });
+  }
 };

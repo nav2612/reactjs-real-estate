@@ -22,6 +22,11 @@ router.use(function (req, res, next) {
     }
   });
 
-router.post('/createlist',listing.createList);
+
+router.post('/createlist',property.createList);
+router.put('/updateproperty/:id',property.updatedProperty)
+router.get('/getallcities',property.getAllCities);
+router.get('/getallproperties',property.getAllProperties);
+router.get('/getpropertybyCity/:city',property.getPropertyByCity);
 
 module.exports = router;
