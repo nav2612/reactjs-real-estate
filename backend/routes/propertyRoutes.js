@@ -2,7 +2,7 @@ const express = require('express');
 const router= express.Router();
 const jwt= require('jsonwebtoken');
 const key = "eoubouYBiycenauocbaonpicne";
-const listing = require('../controllers/listingControllers.js');
+const property = require('../controllers/propertyControllers.js');
 
 
 router.use(function (req, res, next) {
@@ -21,7 +21,6 @@ router.use(function (req, res, next) {
       });
     }
   });
-
 
 router.post('/createlist',property.createList);
 router.put('/updateproperty/:id',property.updatedProperty)
