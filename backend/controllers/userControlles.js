@@ -53,7 +53,7 @@ exports.signUp = async (req, res) => {
       phoneNumber,
       password,
       otp,
-      status: false, 
+      status: false,
     });
     await user.save();
 
@@ -80,7 +80,7 @@ exports.verifyOtp = async (req, res) => {
 
   try {
     // Find the user by phone number
-    const user = await Users.findOne({phoneNumber: phoneNumber });
+    const user = await Users.findOne({ phoneNumber: phoneNumber });
     if (!user) {
       return res.status(404).json({
         status: false,
@@ -103,7 +103,7 @@ exports.verifyOtp = async (req, res) => {
 
     return res.status(200).json({
       status: true,
-      message:"OTP verified successfully.",
+      message: "OTP verified successfully.",
     });
   } catch (err) {
     return res.status(500).json({
@@ -135,7 +135,11 @@ exports.login = (req, res) => {
 
       // Generate and send JWT token
       const token = jwt.sign(
-        { id: user._id, companyName: user.companyName },
+        {
+          id: user._id,
+          companyName: user.companyName,
+          phoneNumber: user.phoneNumber,
+        },
         secretKey,
         { expiresIn: "2h" }
       );
@@ -245,8 +249,6 @@ exports.updateUser = async (req, res) => {
   }
 };
 
-
-
 // API for Generating random 6 digits OTP (NOT USING NOW)
 exports.generateOtp = async (req, res) => {
   const errors = validationResult(req);
@@ -276,6 +278,32 @@ exports.generateOtp = async (req, res) => {
     return res.status(200).json({
       status: true,
       message: "OTP sent to the user",
+    });
+  } catch (err) {
+    return res.status(500).json({
+      status: false,
+      message: err.message,
+    });
+  }
+};
+
+exports.getProfile = (req, res) => {
+  try {
+    const user = req.decoded;
+
+    Users.findOne({ _id: user.id }).then((data) => {
+      if (!data) {
+        return res.status(404).json({
+          status: false,
+          message: "No profile found",
+        });
+      } else {
+        return res.status(200).json({
+          status: true,
+          message: "Getting profile successfully",
+          data: data,
+        });
+      }
     });
   } catch (err) {
     return res.status(500).json({

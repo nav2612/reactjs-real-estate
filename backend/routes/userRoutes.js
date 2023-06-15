@@ -29,6 +29,7 @@ router.use(function (req, res, next) {
   }
 });
 
-router.put('/updateuser/', users.updateUser);
+router.put('/updateuser', users.updateUser);
+router.get('/getprofile', users.getProfile);
 
 module.exports = router;
